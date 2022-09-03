@@ -10,12 +10,7 @@ int main(int argc, char *argv[])
 
     VultusServiceClient client;
     client.connectToServer();
-
-    QVector<QVariant> variants;
-    variants.append(QVariant("login"));
-    variants.append(QVariant("pass"));
-    client.sendToServer(authToServer, variants);
-    client.sendToServer(getOnlineUsers);
+    client.sendToServer();
 
     VultusMainWindow w;
     w.show();

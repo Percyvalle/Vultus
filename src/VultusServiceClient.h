@@ -4,11 +4,6 @@
 #include <QTcpSocket>
 #include <QDataStream>
 
-enum sendCommand {
-    authToServer= 0,
-    getUserInfo = 1,
-    getOnlineUsers = 2
-};
 
 class VultusServiceClient : public QTcpSocket
 {
@@ -17,8 +12,7 @@ public:
     explicit VultusServiceClient(QObject *parent = nullptr);
     ~VultusServiceClient();
 
-    void sendToServer(quint8 _command, QVector<QVariant> &_sendData);
-    void sendToServer(quint8 _command);
+    void sendToServer();
     void connectToServer();
 
 private slots:

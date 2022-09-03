@@ -20,31 +20,13 @@ void VultusServiceClient::connectToServer()
 }
 
 
-void VultusServiceClient::sendToServer(quint8 _command, QVector<QVariant> &_sendData)
+void VultusServiceClient::sendToServer()
 {
     m_data.clear();
     QDataStream out(&m_data, QIODevice::WriteOnly);
 
     out.setVersion(QDataStream::Qt_5_15);
-    out << quint16(0) << QVariant(_command);
-    for(const QVariant &data : _sendData){
-        out << data;
-    }
-
-    out.device()->seek(0);
-    out << quint16(m_data.size() - sizeof(quint16));
-
-    write(m_data);
-}
-
-void VultusServiceClient::sendToServer(quint8 _command)
-{
-    m_data.clear();
-    QDataStream out(&m_data, QIODevice::WriteOnly);
-
-    out.setVersion(QDataStream::Qt_5_15);
-    out << quint16(0) << QVariant(_command);
-
+    out << quint16(0) << QString("login");
     out.device()->seek(0);
     out << quint16(m_data.size() - sizeof(quint16));
 
@@ -69,9 +51,5 @@ void VultusServiceClient::readyReadMessage()
         } else {
             m_block_size = 0;
         }
-
-        QVariant command;
-        in >> command;
-        qDebug() << command;
     }
 }

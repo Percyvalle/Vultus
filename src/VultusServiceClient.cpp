@@ -13,20 +13,23 @@ VultusServiceClient::~VultusServiceClient()
 
 void VultusServiceClient::connectToServer()
 {
-    connectToHost("127.0.01", 2000);
+    connectToHost("192.168.0.182", 2000);
 
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadMessage()));
     connect(this, SIGNAL(disconnected()), this, SLOT(deleteLater()));
 }
 
 
-void VultusServiceClient::sendToServer()
+void VultusServiceClient::sendToServer(uint _command, QList<QVariant> _send_data)
 {
     m_data.clear();
     QDataStream out(&m_data, QIODevice::WriteOnly);
 
     out.setVersion(QDataStream::Qt_5_15);
-    out << quint16(0) << QString("login");
+    out << quint16(0) << QVariant(_command);
+    for(const QVariant &i : _send_data){
+        out << i;
+    }
     out.device()->seek(0);
     out << quint16(m_data.size() - sizeof(quint16));
 

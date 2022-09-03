@@ -3,6 +3,7 @@
 
 #include <QTcpSocket>
 #include <QDataStream>
+#include <QJsonObject>
 
 enum command{
     authToServer = 0,

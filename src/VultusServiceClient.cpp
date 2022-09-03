@@ -1,5 +1,7 @@
 #include "VultusServiceClient.h"
 
+#include <QJsonArray>
+
 VultusServiceClient::VultusServiceClient(QObject *parent)
     : QTcpSocket{parent}
 {
@@ -26,7 +28,14 @@ void VultusServiceClient::sendToServer(uint _command, QList<QVariant> _send_data
     QDataStream out(&m_data, QIODevice::WriteOnly);
 
     out.setVersion(QDataStream::Qt_5_15);
-    out << quint16(0) << QVariant(_command);
+
+    QJsonObject ddd;
+    QJsonArray vvv;
+
+    ddd["COMMAND"] = "authToServer";
+    vvv.append(ddd);
+
+    out << quint16(0) << QVariant(vvv);
     for(const QVariant &i : _send_data){
         out << i;
     }
@@ -54,5 +63,11 @@ void VultusServiceClient::readyReadMessage()
         } else {
             m_block_size = 0;
         }
+
+        QVariant command;
+        in >> command;
+        QVariant msg;
+        in >> msg;
+        qDebug() << msg.value<QJsonArray>();
     }
 }

@@ -22,23 +22,14 @@ void VultusServiceClient::connectToServer()
 }
 
 
-void VultusServiceClient::sendToServer(uint _command, QList<QVariant> _send_data)
+void VultusServiceClient::sendToServer(QJsonArray _send_data)
 {
     m_data.clear();
     QDataStream out(&m_data, QIODevice::WriteOnly);
 
     out.setVersion(QDataStream::Qt_5_15);
 
-    QJsonObject ddd;
-    QJsonArray vvv;
-
-    ddd["COMMAND"] = "authToServer";
-    vvv.append(ddd);
-
-    out << quint16(0) << QVariant(vvv);
-    for(const QVariant &i : _send_data){
-        out << i;
-    }
+    out << quint16(0) << QVariant(_send_data);
     out.device()->seek(0);
     out << quint16(m_data.size() - sizeof(quint16));
 

@@ -5,11 +5,6 @@
 #include <QDataStream>
 #include <QJsonObject>
 
-enum command{
-    authToServer = 0,
-    getOnlineUsers = 1
-};
-
 class VultusServiceClient : public QTcpSocket
 {
     Q_OBJECT
@@ -17,7 +12,7 @@ public:
     explicit VultusServiceClient(QObject *parent = nullptr);
     ~VultusServiceClient();
 
-    void sendToServer(uint _command, QList<QVariant> _send_data);
+    void sendToServer(QJsonArray _send_data);
     void connectToServer();
 
 private slots:

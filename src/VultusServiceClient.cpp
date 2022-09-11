@@ -1,10 +1,10 @@
 #include "VultusServiceClient.h"
 
-#include <QJsonArray>
-
 VultusServiceClient::VultusServiceClient(QObject *parent)
     : QTcpSocket{parent}
 {
+    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorConnectToServer()));
+    connect(this, SIGNAL(connected()), this, SLOT(doneConnectToServer()));
 }
 
 VultusServiceClient::~VultusServiceClient()
@@ -12,17 +12,15 @@ VultusServiceClient::~VultusServiceClient()
 
 }
 
-
-void VultusServiceClient::connectToServer()
+void VultusServiceClient::connectToServer(QString &_address)
 {
-    connectToHost("192.168.0.182", 2000);
+    connectToHost(_address, 2000);
 
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadMessage()));
     connect(this, SIGNAL(disconnected()), this, SLOT(deleteLater()));
 }
 
-
-void VultusServiceClient::sendToServer(QJsonArray _send_data)
+void VultusServiceClient::sendToServer(QJsonArray &_send_data)
 {
     m_data.clear();
     QDataStream out(&m_data, QIODevice::WriteOnly);
@@ -37,6 +35,7 @@ void VultusServiceClient::sendToServer(QJsonArray _send_data)
     waitForReadyRead();
 }
 
+#include <QMessageBox>
 void VultusServiceClient::readyReadMessage()
 {
     QDataStream in(this);
@@ -56,8 +55,29 @@ void VultusServiceClient::readyReadMessage()
             m_block_size = 0;
         }
 
+        QMessageBox msgBox;
         QVariant msg;
+
         in >> msg;
-        qDebug() << msg.value<QJsonArray>();
+
+        QJsonArray ar = msg.value<QJsonArray>();
+
+        msgBox.information(0, "Пришло", msg.value<QJsonArray>()[2].toObject()["first_name"].toString());
+        msgBox.setMinimumSize(800, 800);
+        qDebug() << ar;
     }
 }
+
+void VultusServiceClient::errorConnectToServer()
+{
+    QMessageBox msgBox;
+    msgBox.critical(0, "Ошибка подключения к серверу", "Ошибка подключения: " + errorString());
+    msgBox.setFixedSize(500, 200);
+    disconnectFromHost();
+}
+
+void VultusServiceClient::doneConnectToServer()
+{
+    registrationDialog->show();
+}
+

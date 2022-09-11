@@ -7,7 +7,7 @@ VultusMainWindow::VultusMainWindow(QWidget *parent)
 {
     m_ui->setupUi(this);
 
-    initWindow();
+    initUI();
     connectionUI();
 }
 
@@ -16,7 +16,7 @@ VultusMainWindow::~VultusMainWindow()
     delete m_ui;
 }
 
-void VultusMainWindow::initWindow()
+void VultusMainWindow::initUI()
 {
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle("Vultus");

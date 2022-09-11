@@ -15,7 +15,7 @@ public:
     VultusMainWindow(QWidget *parent = nullptr);
     ~VultusMainWindow();
 
-    void initWindow();
+    void initUI();
     void connectionUI();
 
 private slots:

@@ -9,16 +9,19 @@ MOC_DIR = .build
 OBJECTS_DIR = .build
 
 SOURCES += \
+    src/VultusRegistrationDialog.cpp \
     src/VultusServiceClient.cpp \
     src/main.cpp \
     src/VultusMainWindow.cpp
 
 HEADERS += \
     src/VultusMainWindow.h \
+    src/VultusRegistrationDialog.h \
     src/VultusServiceClient.h
 
 FORMS += \
-    src/VultusMainWindow.ui
+    src/VultusMainWindow.ui \
+    src/VultusRegistrationDialog.ui
 
 RESOURCES += \
     resource.qrc

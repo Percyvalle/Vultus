@@ -4,14 +4,15 @@
 #include <QJsonArray>
 
 #include "VultusServiceClient.h"
+#include "VultusRegistrationDialog.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setQuitOnLastWindowClosed(true);
 
-    VultusServiceClient client;
-    client.connectToServer();
-
+    QString address("192.168.0.0");
+    VultusServiceClient::client().connectToServer(address);
 
     QJsonObject ddd;
     QJsonArray vvv;
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     ddd["LOGIN"] = "admin";
     ddd["PASSWORD"] = "admin";
     vvv.append(ddd);
-    client.sendToServer(vvv);
+    VultusServiceClient::client().sendToServer(vvv);
     qDebug() << "Auth";
 
     QJsonObject sss;
@@ -28,10 +29,8 @@ int main(int argc, char *argv[])
 
     sss["COMMAND"] = "getOnlineUsers";
     fff.append(sss);
-    client.sendToServer(fff);
+    VultusServiceClient::client().sendToServer(fff);
     qDebug() << "Users";
 
-    VultusMainWindow w;
-    w.show();
     return a.exec();
 }

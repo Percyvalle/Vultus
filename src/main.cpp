@@ -1,6 +1,7 @@
 #include "VultusMainWindow.h"
 
 #include <QApplication>
+#include <singleapplication.h>
 #include <QJsonArray>
 
 #include "VultusServiceClient.h"
@@ -8,14 +9,14 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    a.setQuitOnLastWindowClosed(true);
+    SingleApplication app(argc, argv);
 
-    QString address("192.168.0.0");
+    QString address("192.168.0.182");
     VultusServiceClient::client().connectToServer(address);
 
     QJsonObject ddd;
     QJsonArray vvv;
+
 
     ddd["COMMAND"] = "authToServer";
     ddd["LOGIN"] = "admin";
@@ -32,5 +33,5 @@ int main(int argc, char *argv[])
     VultusServiceClient::client().sendToServer(fff);
     qDebug() << "Users";
 
-    return a.exec();
+    return app.exec();
 }

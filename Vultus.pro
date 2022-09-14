@@ -8,6 +8,9 @@ UI_DIR = .build
 MOC_DIR = .build
 OBJECTS_DIR = .build
 
+include(modules/SingleApplication/singleapplication.pri)
+DEFINES += QAPPLICATION_CLASS=QApplication
+
 SOURCES += \
     src/VultusRegistrationDialog.cpp \
     src/VultusServiceClient.cpp \

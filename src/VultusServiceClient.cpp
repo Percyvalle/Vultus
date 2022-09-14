@@ -9,7 +9,7 @@ VultusServiceClient::VultusServiceClient(QObject *parent)
 
 VultusServiceClient::~VultusServiceClient()
 {
-
+    delete registrationDialog;
 }
 
 void VultusServiceClient::connectToServer(QString &_address)
@@ -73,6 +73,7 @@ void VultusServiceClient::errorConnectToServer()
     QMessageBox msgBox;
     msgBox.critical(0, "Ошибка подключения к серверу", "Ошибка подключения: " + errorString());
     msgBox.setFixedSize(500, 200);
+
     disconnectFromHost();
 }
 
@@ -80,4 +81,5 @@ void VultusServiceClient::doneConnectToServer()
 {
     registrationDialog->show();
 }
+
 

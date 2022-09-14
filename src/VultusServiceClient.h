@@ -9,6 +9,7 @@
 #include <QMessageBox>
 
 #include "VultusRegistrationDialog.h"
+#include "VultusCommand.h"
 
 class VultusServiceClient : public QTcpSocket
 {
@@ -24,7 +25,7 @@ private:
     ~VultusServiceClient();
 
 public:
-    void sendToServer(QJsonArray &_send_data);
+    void sendToServer(VultusCommand* _command);
     void connectToServer(QString &_address);
 
 private slots:

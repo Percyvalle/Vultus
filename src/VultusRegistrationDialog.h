@@ -1,7 +1,6 @@
 #ifndef VULTUSREGISTRATIONDIALOG_H
 #define VULTUSREGISTRATIONDIALOG_H
 
-#include <QAbstractSocket>
 #include <QDialog>
 
 namespace Ui {

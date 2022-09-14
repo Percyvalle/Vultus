@@ -6,6 +6,7 @@
 
 #include "VultusServiceClient.h"
 #include "VultusRegistrationDialog.h"
+#include "VultusCommand.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,24 +15,15 @@ int main(int argc, char *argv[])
     QString address("192.168.0.182");
     VultusServiceClient::client().connectToServer(address);
 
-    QJsonObject ddd;
-    QJsonArray vvv;
+    VultusCommand* cmd = new VultusCommand("authToServer");
+    cmd->addPayload("LOGIN", "admin");
+    cmd->addPayload("PASSWORD", "admin");
 
+    VultusServiceClient::client().sendToServer(cmd);
 
-    ddd["COMMAND"] = "authToServer";
-    ddd["LOGIN"] = "admin";
-    ddd["PASSWORD"] = "admin";
-    vvv.append(ddd);
-    VultusServiceClient::client().sendToServer(vvv);
-    qDebug() << "Auth";
+    VultusCommand* cmdd = new VultusCommand("getUsers");
 
-    QJsonObject sss;
-    QJsonArray fff;
-
-    sss["COMMAND"] = "getOnlineUsers";
-    fff.append(sss);
-    VultusServiceClient::client().sendToServer(fff);
-    qDebug() << "Users";
+    VultusServiceClient::client().sendToServer(cmdd);
 
     return app.exec();
 }

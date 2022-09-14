@@ -12,14 +12,18 @@ include(modules/SingleApplication/singleapplication.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += \
+    src/VultusCommand.cpp \
     src/VultusRegistrationDialog.cpp \
+    src/VultusResponseHandler.cpp \
     src/VultusServiceClient.cpp \
     src/main.cpp \
     src/VultusMainWindow.cpp
 
 HEADERS += \
+    src/VultusCommand.h \
     src/VultusMainWindow.h \
     src/VultusRegistrationDialog.h \
+    src/VultusResponseHandler.h \
     src/VultusServiceClient.h
 
 FORMS += \

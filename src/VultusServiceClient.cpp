@@ -20,14 +20,14 @@ void VultusServiceClient::connectToServer(QString &_address)
     connect(this, SIGNAL(disconnected()), this, SLOT(deleteLater()));
 }
 
-void VultusServiceClient::sendToServer(QJsonArray &_send_data)
+void VultusServiceClient::sendToServer(VultusCommand* _command)
 {
     m_data.clear();
     QDataStream out(&m_data, QIODevice::WriteOnly);
 
     out.setVersion(QDataStream::Qt_5_15);
 
-    out << quint16(0) << QVariant(_send_data);
+    out << quint16(0) << QVariant(_command->getCommand());
     out.device()->seek(0);
     out << quint16(m_data.size() - sizeof(quint16));
 

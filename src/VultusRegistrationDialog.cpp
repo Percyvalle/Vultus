@@ -29,5 +29,4 @@ void VultusRegistrationDialog::connectionUI()
 
 void VultusRegistrationDialog::clickedAuthorization()
 {
-
 }

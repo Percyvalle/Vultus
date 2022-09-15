@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+#include "VultusMainWindow.h"
+#include "VultusResponseHandler.h"
+
 namespace Ui {
 class VultusRegistrationDialog;
 }
@@ -12,7 +15,7 @@ class VultusRegistrationDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit VultusRegistrationDialog(QWidget *parent = nullptr);
+    VultusRegistrationDialog(QWidget *parent = nullptr);
     ~VultusRegistrationDialog();
 
     void initUI();
@@ -20,9 +23,12 @@ public:
 
 private slots:
     void clickedAuthorization();
+    void authToServerIsDone(QJsonArray _response);
+    void authToServerError(QJsonArray _response);
 
 private:
     Ui::VultusRegistrationDialog *ui;
+    VultusMainWindow* m_main_window;
 };
 
 #endif // VULTUSREGISTRATIONDIALOG_H

@@ -9,6 +9,7 @@
 #include <QMessageBox>
 
 #include "VultusRegistrationDialog.h"
+#include "VultusResponseHandler.h"
 #include "VultusCommand.h"
 
 class VultusServiceClient : public QTcpSocket
@@ -34,9 +35,12 @@ private slots:
     void doneConnectToServer();
 
 private:
-    VultusRegistrationDialog *registrationDialog = new VultusRegistrationDialog;
+    VultusRegistrationDialog *m_registration_dialog;
     QByteArray m_data;
     quint16 m_block_size = 0;
+
+public:
+    static VultusResponseHandler *m_response_handler;
 };
 
 #endif // VULTUSSERVICECLIENT_H

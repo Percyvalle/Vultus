@@ -207,6 +207,7 @@ border: 0;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background: rgba(245, 245, 245,50%); 
+border: 0;
 border-radius: 14px;</string>
       </property>
      </widget>

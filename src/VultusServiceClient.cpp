@@ -1,15 +1,16 @@
 #include "VultusServiceClient.h"
 
+
 VultusServiceClient::VultusServiceClient(QObject *parent)
     : QTcpSocket{parent}
 {
     connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorConnectToServer()));
     connect(this, SIGNAL(connected()), this, SLOT(doneConnectToServer()));
 }
-
 VultusServiceClient::~VultusServiceClient()
 {
-    delete registrationDialog;
+    delete m_registration_dialog;
+    delete m_response_handler;
 }
 
 void VultusServiceClient::connectToServer(QString &_address)
@@ -35,7 +36,6 @@ void VultusServiceClient::sendToServer(VultusCommand* _command)
     waitForReadyRead();
 }
 
-#include <QMessageBox>
 void VultusServiceClient::readyReadMessage()
 {
     QDataStream in(this);
@@ -55,16 +55,10 @@ void VultusServiceClient::readyReadMessage()
             m_block_size = 0;
         }
 
-        QMessageBox msgBox;
-        QVariant msg;
-
-        in >> msg;
-
-        QJsonArray ar = msg.value<QJsonArray>();
-
-        msgBox.information(0, "Пришло", msg.value<QJsonArray>()[2].toObject()["first_name"].toString());
-        msgBox.setMinimumSize(800, 800);
-        qDebug() << ar;
+        QVariant response;
+        in >> response;
+        QJsonArray json_response = response.value<QJsonArray>();
+        m_response_handler->processResponse(json_response);
     }
 }
 
@@ -79,7 +73,9 @@ void VultusServiceClient::errorConnectToServer()
 
 void VultusServiceClient::doneConnectToServer()
 {
-    registrationDialog->show();
+    m_registration_dialog = new VultusRegistrationDialog;
+    m_registration_dialog->show();
 }
 
+VultusResponseHandler *VultusServiceClient::m_response_handler = new VultusResponseHandler;
 

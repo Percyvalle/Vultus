@@ -1,6 +1,8 @@
 #include "VultusRegistrationDialog.h"
 #include "ui_VultusRegistrationDialog.h"
 
+#include "VultusServiceClient.h"
+
 VultusRegistrationDialog::VultusRegistrationDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::VultusRegistrationDialog)
@@ -9,6 +11,11 @@ VultusRegistrationDialog::VultusRegistrationDialog(QWidget *parent) :
 
     initUI();
     connectionUI();
+
+    connect(VultusServiceClient::m_response_handler, &VultusResponseHandler::authToServerResponse,
+            this, &VultusRegistrationDialog::authToServerIsDone);
+    connect(VultusServiceClient::m_response_handler, &VultusResponseHandler::errorResponse,
+            this, &VultusRegistrationDialog::authToServerError);
 }
 
 VultusRegistrationDialog::~VultusRegistrationDialog()
@@ -29,4 +36,30 @@ void VultusRegistrationDialog::connectionUI()
 
 void VultusRegistrationDialog::clickedAuthorization()
 {
+    VultusCommand* cmd = new VultusCommand("authToServer");
+    cmd->addPayload("LOGIN", ui->login_line_edit->text());
+    cmd->addPayload("PASSWORD", ui->password_line_edit->text());
+
+    VultusServiceClient::client().sendToServer(cmd);
+}
+
+void VultusRegistrationDialog::authToServerIsDone(QJsonArray _response)
+{
+    this->hide();
+    this->disconnect();
+
+    m_main_window = new VultusMainWindow();
+    m_main_window->show();
+}
+
+void VultusRegistrationDialog::authToServerError(QJsonArray _response)
+{
+    QString error_response = _response.first().toObject()["ERROR"].toString();
+    ui->info_label->setText(error_response);
+    ui->login_line_edit->setStyleSheet("background: rgba(245, 245, 245,50%); \
+                                        border: 1 solid red; \
+                                        border-radius: 10px;");
+    ui->password_line_edit->setStyleSheet("background: rgba(245, 245, 245,50%); \
+                                        border: 1 solid red; \
+                                        border-radius: 10px;");
 }

@@ -5,15 +5,25 @@
 
 #include <QPushButton>
 #include <QScrollArea>
+#include <QSizePolicy>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QVector>
+
+enum StatusList{
+    notAvailable = 0,
+    atWorkPlace = 1,
+    veryBusy = 2
+
+};
 
 class VultusScrollAreaController : public QScrollArea
 {
 public:
-    VultusScrollAreaController();
+    VultusScrollAreaController(QWidget *parent = nullptr);
     ~VultusScrollAreaController();
 
-    void addWidget(VultusProfileInterface *_profile);
+    QFrame* addWidget(VultusProfileInterface *_profile);
     void rmvWidget(VultusProfileInterface *_profile);
 
 private:

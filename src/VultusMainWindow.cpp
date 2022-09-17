@@ -31,6 +31,8 @@ void VultusMainWindow::initUI()
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle("Vultus");
 
+    m_ui->profile_layout_area->layout()->setSizeConstraint(QLayout::SetMaximumSize);
+
     QPixmap search_icon(":/icon/resource/icon_search.png");
     m_ui->search_icon_label->setPixmap(search_icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
@@ -45,6 +47,7 @@ void VultusMainWindow::connectionUI()
 void VultusMainWindow::authToServerIsDone(QJsonArray _response)
 {
     m_profile_main = new VultusProfileMain(_response.first().toObject());
+    m_area_controller = m_ui->profile_scroll_area;
 
     VultusCommand *command_get_users = new VultusCommand("getUsers");
     VultusServiceClient::client().sendToServer(command_get_users);
@@ -52,9 +55,11 @@ void VultusMainWindow::authToServerIsDone(QJsonArray _response)
 
 void VultusMainWindow::getUsersIsDone(QJsonArray _response)
 {
+    _response.removeFirst();
     for(QJsonValueRef profile_object : _response){
         VultusProfileInterface *profile_members = new VultusProfileInterface(profile_object.toObject());
         m_profile_members.insert(profile_members->id(), profile_members);
+        m_ui->profile_layout_area->layout()->addWidget(m_area_controller->addWidget(profile_members));
     }
 }
 

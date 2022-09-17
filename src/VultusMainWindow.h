@@ -9,6 +9,7 @@
 #include "VultusProfileInterface.h"
 #include "VultusProfileMain.h"
 #include "VultusCommand.h"
+#include "VultusScrollAreaController.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class VultusMainWindow; }
@@ -35,6 +36,7 @@ private slots:
 private:
     Ui::VultusMainWindow *m_ui;
     VultusProfileInterface *m_profile_main;
+    VultusScrollAreaController *m_area_controller;
     QMap<int, VultusProfileInterface*> m_profile_members;
 };
 #endif // VULTUSMAINWINDOW_H

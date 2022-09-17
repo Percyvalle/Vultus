@@ -245,7 +245,7 @@ border-radius: 14px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QScrollArea" name="profile_scroll_area">
+     <widget class="VultusScrollAreaController" name="profile_scroll_area">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -273,20 +273,7 @@ border-radius: 14px;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame{
-background: rgba(245, 245, 245,50%); 
-border: 0;}
-QFrame::hover{
-background: grey; 
-border: 0;}
-QPushButton{
-background: rgba(245, 245, 245,0%); 
-border: 0;}
-QLabel#photo_label{
-background-color: white;
-border: 0;
-border-radius: 35;}
-</string>
+        <string notr="true"/>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="sizeConstraint">
@@ -304,87 +291,6 @@ border-radius: 35;}
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item>
-         <widget class="QFrame" name="frame_11">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>90</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,1">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="status_label">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: #3cb371;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="photo_label">
-             <property name="minimumSize">
-              <size>
-               <width>70</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>70</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="members_button">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>Пользователь</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
      </widget>
@@ -513,6 +419,14 @@ border-radius: 35;}
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VultusScrollAreaController</class>
+   <extends>QScrollArea</extends>
+   <header>src/VultusScrollAreaController.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

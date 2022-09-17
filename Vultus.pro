@@ -13,8 +13,11 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += \
     src/VultusCommand.cpp \
+    src/VultusProfileInterface.cpp \
+    src/VultusProfileMain.cpp \
     src/VultusRegistrationDialog.cpp \
     src/VultusResponseHandler.cpp \
+    src/VultusScrollAreaController.cpp \
     src/VultusServiceClient.cpp \
     src/main.cpp \
     src/VultusMainWindow.cpp
@@ -22,8 +25,11 @@ SOURCES += \
 HEADERS += \
     src/VultusCommand.h \
     src/VultusMainWindow.h \
+    src/VultusProfileInterface.h \
+    src/VultusProfileMain.h \
     src/VultusRegistrationDialog.h \
     src/VultusResponseHandler.h \
+    src/VultusScrollAreaController.h \
     src/VultusServiceClient.h
 
 FORMS += \

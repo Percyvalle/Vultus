@@ -2,6 +2,13 @@
 #define VULTUSMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QMap>
+
+#include "VultusProfileInterface.h"
+#include "VultusProfileMain.h"
+#include "VultusCommand.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class VultusMainWindow; }
@@ -19,12 +26,15 @@ public:
     void connectionUI();
 
 private slots:
-
+    void authToServerIsDone(QJsonArray _response);
+    void getUsersIsDone(QJsonArray _response);
     void employeesButtonClicked();
     void profileButtonClicked();
     void tasksButtonClicked();
 
 private:
     Ui::VultusMainWindow *m_ui;
+    VultusProfileInterface *m_profile_main;
+    QMap<int, VultusProfileInterface*> m_profile_members;
 };
 #endif // VULTUSMAINWINDOW_H

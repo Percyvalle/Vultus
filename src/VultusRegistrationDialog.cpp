@@ -12,6 +12,8 @@ VultusRegistrationDialog::VultusRegistrationDialog(QWidget *parent) :
     initUI();
     connectionUI();
 
+    m_main_window = new VultusMainWindow();
+
     connect(VultusServiceClient::m_response_handler, &VultusResponseHandler::authToServerResponse,
             this, &VultusRegistrationDialog::authToServerIsDone);
     connect(VultusServiceClient::m_response_handler, &VultusResponseHandler::errorResponse,
@@ -43,12 +45,11 @@ void VultusRegistrationDialog::clickedAuthorization()
     VultusServiceClient::client().sendToServer(cmd);
 }
 
-void VultusRegistrationDialog::authToServerIsDone(QJsonArray _response)
+void VultusRegistrationDialog::authToServerIsDone()
 {
     this->hide();
     this->disconnect();
 
-    m_main_window = new VultusMainWindow();
     m_main_window->show();
 }
 
@@ -56,10 +57,4 @@ void VultusRegistrationDialog::authToServerError(QJsonArray _response)
 {
     QString error_response = _response.first().toObject()["ERROR"].toString();
     ui->info_label->setText(error_response);
-    ui->login_line_edit->setStyleSheet("background: rgba(245, 245, 245,50%); \
-                                        border: 1 solid red; \
-                                        border-radius: 10px;");
-    ui->password_line_edit->setStyleSheet("background: rgba(245, 245, 245,50%); \
-                                        border: 1 solid red; \
-                                        border-radius: 10px;");
 }

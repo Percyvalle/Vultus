@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>950</width>
-    <height>850</height>
+    <width>1020</width>
+    <height>890</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <rect>
       <x>0</x>
       <y>70</y>
-      <width>950</width>
+      <width>1020</width>
       <height>90</height>
      </rect>
     </property>
@@ -69,6 +69,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Bahnschrift SemiBold</family>
@@ -77,8 +83,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(245, 245, 245,0%);
-border: 0;</string>
+        <string notr="true">QPushButton{background-color: rgba(245, 245, 245,0%);
+border: 0;}</string>
        </property>
        <property name="text">
         <string>СОТРУДНИКИ</string>
@@ -109,6 +115,12 @@ border: 0;</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>130</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Bahnschrift SemiBold</family>
@@ -117,8 +129,8 @@ border: 0;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(245, 245, 245,0%);
-border: 0;</string>
+        <string notr="true">QPushButton{background-color: rgba(245, 245, 245,0%);
+border: 0;}</string>
        </property>
        <property name="text">
         <string>ПРОФИЛЬ</string>
@@ -149,6 +161,12 @@ border: 0;</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>110</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Bahnschrift SemiBold</family>
@@ -157,8 +175,8 @@ border: 0;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(245, 245, 245,0%);
-border: 0;</string>
+        <string notr="true">QPushButton{background-color: rgba(245, 245, 245,0%);
+border: 0;}</string>
        </property>
        <property name="text">
         <string>ЗАДАЧИ</string>
@@ -188,8 +206,8 @@ border: 0;</string>
      <rect>
       <x>0</x>
       <y>160</y>
-      <width>950</width>
-      <height>690</height>
+      <width>1020</width>
+      <height>731</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -201,7 +219,7 @@ border: 0;</string>
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>391</width>
+        <width>411</width>
         <height>28</height>
        </rect>
       </property>
@@ -214,7 +232,7 @@ border-radius: 14px;</string>
      <widget class="QLabel" name="search_icon_label">
       <property name="geometry">
        <rect>
-        <x>370</x>
+        <x>395</x>
         <y>10</y>
         <width>28</width>
         <height>28</height>
@@ -232,9 +250,12 @@ border-radius: 14px;</string>
        <rect>
         <x>10</x>
         <y>50</y>
-        <width>390</width>
-        <height>630</height>
+        <width>410</width>
+        <height>670</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
@@ -247,18 +268,132 @@ border-radius: 14px;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>390</width>
-         <height>630</height>
+         <width>410</width>
+         <height>670</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame{
+background: rgba(245, 245, 245,50%); 
+border: 0;}
+QFrame::hover{
+background: grey; 
+border: 0;}
+QPushButton{
+background: rgba(245, 245, 245,0%); 
+border: 0;}
+QLabel#photo_label{
+background-color: white;
+border: 0;
+border-radius: 35;}
+</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMaximumSize</enum>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="frame_11">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,1">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="status_label">
+             <property name="minimumSize">
+              <size>
+               <width>60</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: #3cb371;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="photo_label">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="members_button">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Пользователь</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="widget_2" native="true">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>430</x>
         <y>10</y>
-        <width>210</width>
+        <width>220</width>
         <height>270</height>
        </rect>
       </property>
@@ -269,9 +404,9 @@ border-radius: 14px;</string>
      <widget class="QWidget" name="widget_3" native="true">
       <property name="geometry">
        <rect>
-        <x>630</x>
+        <x>660</x>
         <y>10</y>
-        <width>310</width>
+        <width>350</width>
         <height>270</height>
        </rect>
       </property>
@@ -282,10 +417,10 @@ border-radius: 14px;</string>
      <widget class="QWidget" name="widget_4" native="true">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>430</x>
         <y>290</y>
-        <width>530</width>
-        <height>60</height>
+        <width>580</width>
+        <height>70</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -295,10 +430,10 @@ border-radius: 14px;</string>
      <widget class="QWidget" name="widget_5" native="true">
       <property name="geometry">
        <rect>
-        <x>410</x>
-        <y>360</y>
-        <width>530</width>
-        <height>320</height>
+        <x>430</x>
+        <y>370</y>
+        <width>580</width>
+        <height>350</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -312,8 +447,8 @@ border-radius: 14px;</string>
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>230</width>
-        <height>310</height>
+        <width>250</width>
+        <height>350</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -323,10 +458,10 @@ border-radius: 14px;</string>
      <widget class="QWidget" name="widget_7" native="true">
       <property name="geometry">
        <rect>
-        <x>250</x>
+        <x>270</x>
         <y>10</y>
-        <width>690</width>
-        <height>310</height>
+        <width>740</width>
+        <height>350</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -337,8 +472,8 @@ border-radius: 14px;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>330</y>
-        <width>930</width>
+        <y>370</y>
+        <width>1000</width>
         <height>350</height>
        </rect>
       </property>
@@ -353,8 +488,8 @@ border-radius: 14px;</string>
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>930</width>
-        <height>310</height>
+        <width>1000</width>
+        <height>350</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -365,8 +500,8 @@ border-radius: 14px;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>330</y>
-        <width>930</width>
+        <y>370</y>
+        <width>1000</width>
         <height>350</height>
        </rect>
       </property>

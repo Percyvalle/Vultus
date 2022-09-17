@@ -5,6 +5,8 @@
 
 #include "VultusMainWindow.h"
 #include "VultusResponseHandler.h"
+#include "VultusProfileInterface.h"
+#include "VultusProfileMain.h"
 
 namespace Ui {
 class VultusRegistrationDialog;
@@ -23,7 +25,7 @@ public:
 
 private slots:
     void clickedAuthorization();
-    void authToServerIsDone(QJsonArray _response);
+    void authToServerIsDone();
     void authToServerError(QJsonArray _response);
 
 private:

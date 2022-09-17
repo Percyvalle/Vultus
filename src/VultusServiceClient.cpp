@@ -33,7 +33,6 @@ void VultusServiceClient::sendToServer(VultusCommand* _command)
     out << quint16(m_data.size() - sizeof(quint16));
 
     write(m_data);
-    waitForReadyRead();
 }
 
 void VultusServiceClient::readyReadMessage()
@@ -58,6 +57,7 @@ void VultusServiceClient::readyReadMessage()
         QVariant response;
         in >> response;
         QJsonArray json_response = response.value<QJsonArray>();
+        qDebug() << json_response;
         m_response_handler->processResponse(json_response);
     }
 }

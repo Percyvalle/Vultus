@@ -25,18 +25,21 @@ public:
 
     void initUI();
     void connectionUI();
+    void updateDossier(VultusProfileInterface* _profile);
 
 private slots:
     void authToServerIsDone(QJsonArray _response);
     void getUsersIsDone(QJsonArray _response);
+    void getOnlineUsersIsDone(QJsonArray _response);
     void employeesButtonClicked();
     void profileButtonClicked();
     void tasksButtonClicked();
+    void profileClicked();
 
 private:
     Ui::VultusMainWindow *m_ui;
     VultusProfileInterface *m_profile_main;
     VultusScrollAreaController *m_area_controller;
-    QMap<int, VultusProfileInterface*> m_profile_members;
+    QMap<QString, VultusProfileInterface*> m_profile_members;
 };
 #endif // VULTUSMAINWINDOW_H

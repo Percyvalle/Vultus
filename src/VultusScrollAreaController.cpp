@@ -71,3 +71,8 @@ void VultusScrollAreaController::rmvWidget(VultusProfileInterface *_profile)
 {
 
 }
+
+const QVector<QPushButton *> &VultusScrollAreaController::connect_list() const
+{
+    return m_connect_list;
+}

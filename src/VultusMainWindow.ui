@@ -207,7 +207,7 @@ border: 0;}</string>
       <x>0</x>
       <y>160</y>
       <width>1020</width>
-      <height>731</height>
+      <height>730</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -306,6 +306,77 @@ border-radius: 14px;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgba(245, 245, 245,80%);</string>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0">
+       <item>
+        <widget class="QLabel" name="profile_member_name">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Bahnschrift SemiBold</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: rgba(245, 245, 245,0%); 
+border: 0;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="profile_member_photo">
+           <property name="maximumSize">
+            <size>
+             <width>130</width>
+             <height>130</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 65;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="profile_member_online_status">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: rgba(245, 245, 245,0%); 
+border: 0;</string>
+         </property>
+         <property name="text">
+          <string>В сети</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="widget_3" native="true">
       <property name="geometry">

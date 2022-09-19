@@ -86,3 +86,8 @@ const QString &VultusProfileInterface::subdivision() const
 {
     return m_subdivision;
 }
+
+bool VultusProfileInterface::online_status() const
+{
+    return m_online_status;
+}

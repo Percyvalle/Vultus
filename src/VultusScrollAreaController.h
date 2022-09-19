@@ -26,6 +26,10 @@ public:
     QFrame* addWidget(VultusProfileInterface *_profile);
     void rmvWidget(VultusProfileInterface *_profile);
 
+
+
+    const QVector<QPushButton *> &connect_list() const;
+
 private:
     QVector<QPushButton*> m_connect_list;
 };

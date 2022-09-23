@@ -16,7 +16,6 @@ public:
     int work_phone() const;
     int work_place() const;
     int status() const;
-    bool online_status() const;
     const QString &birthday() const;
     const QString &description() const;
     const QString &status_text() const;
@@ -25,6 +24,9 @@ public:
     const QString &last_name() const;
     const QString &position() const;
     const QString &subdivision() const;
+
+    bool online_status() const;
+    void setOnlineStatus(bool newOnline_status);
 
 protected:
     int m_id;

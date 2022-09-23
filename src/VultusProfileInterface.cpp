@@ -15,6 +15,7 @@ VultusProfileInterface::VultusProfileInterface(QJsonObject _json_profile)
     m_last_name = _json_profile["last_name"].toString();
     m_position = _json_profile["position"].toString();
     m_subdivision = _json_profile["subdivision"].toString();
+    m_online_status = false;
 }
 
 VultusProfileInterface::~VultusProfileInterface()
@@ -85,6 +86,11 @@ const QString &VultusProfileInterface::position() const
 const QString &VultusProfileInterface::subdivision() const
 {
     return m_subdivision;
+}
+
+void VultusProfileInterface::setOnlineStatus(bool newOnlineStatus)
+{
+    m_online_status = newOnlineStatus;
 }
 
 bool VultusProfileInterface::online_status() const

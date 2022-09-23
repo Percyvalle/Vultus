@@ -49,6 +49,19 @@ void VultusMainWindow::connectionUI()
 void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
 {
     m_ui->profile_member_name->setText(_profile->last_name() + " " + _profile->first_name() + " " + _profile->middle_name());
+    m_ui->position_label->setText(_profile->position());
+    m_ui->subdivision_label->setText(_profile->subdivision());
+    m_ui->birthday_label->setText(_profile->birthday());
+    m_ui->discription_label->setText(_profile->description());
+    m_ui->work_place_label->setText(QString::number(_profile->work_place()));
+    m_ui->work_phone_label->setText(QString::number(_profile->work_phone()));
+    m_ui->phone_label->setText(QString::number(_profile->phone()));
+
+    if(_profile->online_status()){
+        m_ui->profile_member_online_status->setText("В сети");
+    } else {
+        m_ui->profile_member_online_status->setText("Не в сети");
+    }
 }
 
 void VultusMainWindow::authToServerIsDone(QJsonArray _response)
@@ -62,8 +75,12 @@ void VultusMainWindow::authToServerIsDone(QJsonArray _response)
 
 void VultusMainWindow::getUsersIsDone(QJsonArray _response)
 {
-    _response.removeFirst();
     for(QJsonValueRef profile_object : _response){
+        qDebug() << m_profile_main->id();
+        qDebug() << profile_object.toObject()["id"].toInt();
+        if(profile_object.toObject()["id"].toInt() == m_profile_main->id()){
+            continue;
+        }
         VultusProfileInterface *profile_members = new VultusProfileInterface(profile_object.toObject());
         m_profile_members.insert(QString::number(profile_members->id()), profile_members);
         m_ui->profile_layout_area->layout()->addWidget(m_area_controller->addWidget(profile_members));
@@ -72,11 +89,20 @@ void VultusMainWindow::getUsersIsDone(QJsonArray _response)
     for(QPushButton* profile_button : m_area_controller->connect_list()){
         connect(profile_button, &QPushButton::clicked, this, &VultusMainWindow::profileClicked);
     }
+
+    VultusCommand *command_get_online_users = new VultusCommand("getOnlineUsers");
+    VultusServiceClient::client().sendToServer(command_get_online_users);
 }
 
 void VultusMainWindow::getOnlineUsersIsDone(QJsonArray _response)
 {
-    qDebug() << _response;
+    for(VultusProfileInterface *profile_interface : m_profile_members){
+        profile_interface->setOnlineStatus(false);
+    }
+
+    for(QJsonValueRef profile_object : _response){
+        m_profile_members[profile_object.toObject()["id"].toString()]->setOnlineStatus(true);
+    }
 }
 
 void VultusMainWindow::employeesButtonClicked()

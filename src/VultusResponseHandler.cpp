@@ -18,12 +18,15 @@ void VultusResponseHandler::processResponse(QJsonArray& _response)
         QString response_name = response["RESPONSE"].toString();
 
         if(response_name == "authToServerResponse"){
+            _response.removeFirst();
             emit authToServerResponse(_response);
             return;
         } else if (response_name == "getUsersResponse"){
+            _response.removeFirst();
             emit getUsersResponse(_response);
             return;
         } else if (response_name == "getIsOnlineUsersResponse"){
+            _response.removeFirst();
             emit getOnlineUsersResponse(_response);
             return;
         }

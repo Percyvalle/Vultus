@@ -20,6 +20,8 @@ VultusMainWindow::VultusMainWindow(QWidget *parent)
             this, &VultusMainWindow::getUsersIsDone);
     connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::getOnlineUsersResponse,
             this, &VultusMainWindow::getOnlineUsersIsDone);
+    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::errorResponse,
+            this, &VultusMainWindow::showError);
 }
 
 VultusMainWindow::~VultusMainWindow()
@@ -53,9 +55,24 @@ void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
     m_ui->subdivision_label->setText(_profile->subdivision());
     m_ui->birthday_label->setText(_profile->birthday());
     m_ui->discription_label->setText(_profile->description());
+    m_ui->phone_label->setText(_profile->phone());
     m_ui->work_place_label->setText(QString::number(_profile->work_place()));
     m_ui->work_phone_label->setText(QString::number(_profile->work_phone()));
-    m_ui->phone_label->setText(QString::number(_profile->phone()));
+
+    switch(_profile->status()) {
+    case notAvailable:
+        m_ui->profile_member_status->setStyleSheet("background-color: #cccccc;");
+        break;
+    case atWorkPlace:
+        m_ui->profile_member_status->setStyleSheet("background-color: #3cb371;");
+        break;
+    case veryBusy:
+        m_ui->profile_member_status->setStyleSheet("background-color: #cd5c5c;");
+        break;
+    }
+    QPixmap status_icon(":/icon/resource/status_icon/thunder_icon.png");
+    m_ui->profile_member_status->setPixmap(status_icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    m_ui->profile_member_status->setAlignment(Qt::AlignCenter);
 
     if(_profile->online_status()){
         m_ui->profile_member_online_status->setText("В сети");
@@ -76,8 +93,6 @@ void VultusMainWindow::authToServerIsDone(QJsonArray _response)
 void VultusMainWindow::getUsersIsDone(QJsonArray _response)
 {
     for(QJsonValueRef profile_object : _response){
-        qDebug() << m_profile_main->id();
-        qDebug() << profile_object.toObject()["id"].toInt();
         if(profile_object.toObject()["id"].toInt() == m_profile_main->id()){
             continue;
         }
@@ -89,6 +104,8 @@ void VultusMainWindow::getUsersIsDone(QJsonArray _response)
     for(QPushButton* profile_button : m_area_controller->connect_list()){
         connect(profile_button, &QPushButton::clicked, this, &VultusMainWindow::profileClicked);
     }
+
+    updateDossier(m_profile_members.first());
 
     VultusCommand *command_get_online_users = new VultusCommand("getOnlineUsers");
     VultusServiceClient::client().sendToServer(command_get_online_users);
@@ -103,6 +120,13 @@ void VultusMainWindow::getOnlineUsersIsDone(QJsonArray _response)
     for(QJsonValueRef profile_object : _response){
         m_profile_members[profile_object.toObject()["id"].toString()]->setOnlineStatus(true);
     }
+}
+
+void VultusMainWindow::showError(QJsonArray _response)
+{
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error", _response.first().toObject()["ERROR"].toString());
+    messageBox.setFixedSize(500,200);
 }
 
 void VultusMainWindow::employeesButtonClicked()

@@ -20,6 +20,9 @@ QFrame* VultusScrollAreaController::addWidget(VultusProfileInterface *_profile)
     QPushButton *widget_button = new QPushButton;
     QHBoxLayout *widget_layout = new QHBoxLayout;
 
+    QPixmap status_icon(":/icon/resource/status_icon/thunder_icon.png");
+    widget_status_label->setPixmap(status_icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    widget_status_label->setAlignment(Qt::AlignCenter);
     widget_status_label->setMinimumWidth(60);
     widget_status_label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     switch(_profile->status()) {

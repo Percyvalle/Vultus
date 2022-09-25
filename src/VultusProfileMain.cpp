@@ -2,7 +2,7 @@
 
 VultusProfileMain::VultusProfileMain(QJsonObject _json_profile) : VultusProfileInterface(_json_profile)
 {
-
+    qDebug() << m_phone;
 }
 
 VultusProfileMain::~VultusProfileMain()

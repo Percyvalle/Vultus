@@ -31,6 +31,7 @@ private slots:
     void authToServerIsDone(QJsonArray _response);
     void getUsersIsDone(QJsonArray _response);
     void getOnlineUsersIsDone(QJsonArray _response);
+    void showError(QJsonArray _response);
     void employeesButtonClicked();
     void profileButtonClicked();
     void tasksButtonClicked();

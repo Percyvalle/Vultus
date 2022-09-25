@@ -3,10 +3,10 @@
 VultusProfileInterface::VultusProfileInterface(QJsonObject _json_profile)
 {
     m_id = _json_profile["id"].toInt();
-    m_phone = _json_profile["phone"].toInt();
     m_work_phone = _json_profile["workphone"].toInt();
     m_work_place = _json_profile["workplace"].toInt();
     m_status = _json_profile["status"].toInt();
+    m_phone = _json_profile["phone"].toString();
     m_birthday = _json_profile["birthday"].toString();
     m_description = _json_profile["description"].toString();
     m_status_text = _json_profile["status_text"].toString();
@@ -28,11 +28,6 @@ int VultusProfileInterface::id() const
     return m_id;
 }
 
-int VultusProfileInterface::phone() const
-{
-    return m_phone;
-}
-
 int VultusProfileInterface::work_phone() const
 {
     return m_work_phone;
@@ -46,6 +41,11 @@ int VultusProfileInterface::work_place() const
 int VultusProfileInterface::status() const
 {
     return m_status;
+}
+
+const QString &VultusProfileInterface::phone() const
+{
+    return m_phone;
 }
 
 const QString &VultusProfileInterface::birthday() const

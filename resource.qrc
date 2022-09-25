@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/icon">
         <file>resource/icon_search.png</file>
+        <file>resource/icon_down_arrow.png</file>
+        <file>resource/status_icon/airplane_icon.png</file>
+        <file>resource/status_icon/forbidden_icon.png</file>
+        <file>resource/status_icon/house_icon.png</file>
+        <file>resource/status_icon/medical_icon.png</file>
+        <file>resource/status_icon/thunder_icon.png</file>
     </qresource>
 </RCC>

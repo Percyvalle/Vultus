@@ -13,7 +13,6 @@ VultusRegistrationDialog::VultusRegistrationDialog(QWidget *parent) :
     connectionUI();
 
     m_main_window = new VultusMainWindow();
-
     connect(VultusServiceClient::m_response_handler, &VultusResponseHandler::authToServerResponse,
             this, &VultusRegistrationDialog::authToServerIsDone);
     connect(VultusServiceClient::m_response_handler, &VultusResponseHandler::errorResponse,

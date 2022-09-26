@@ -1,7 +1,6 @@
 #ifndef VULTUSPROFILEINTERFACE_H
 #define VULTUSPROFILEINTERFACE_H
 
-#include <QDate>
 #include <QJsonObject>
 #include <QString>
 

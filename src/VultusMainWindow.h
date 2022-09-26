@@ -1,15 +1,15 @@
 #ifndef VULTUSMAINWINDOW_H
 #define VULTUSMAINWINDOW_H
 
-#include <QMainWindow>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QMap>
-
 #include "VultusProfileInterface.h"
 #include "VultusProfileMain.h"
 #include "VultusCommand.h"
 #include "VultusScrollAreaController.h"
+
+#include <QMainWindow>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QMap>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class VultusMainWindow; }
@@ -32,6 +32,7 @@ private slots:
     void getUsersIsDone(QJsonArray _response);
     void getOnlineUsersIsDone(QJsonArray _response);
     void showError(QJsonArray _response);
+
     void employeesButtonClicked();
     void profileButtonClicked();
     void tasksButtonClicked();

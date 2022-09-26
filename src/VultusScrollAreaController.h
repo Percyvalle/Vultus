@@ -10,12 +10,6 @@
 #include <QLabel>
 #include <QVector>
 
-enum StatusList{
-    notAvailable = 0,
-    atWorkPlace = 1,
-    veryBusy = 2
-
-};
 
 class VultusScrollAreaController : public QScrollArea
 {
@@ -24,6 +18,7 @@ public:
     ~VultusScrollAreaController();
 
     QFrame* addWidget(VultusProfileInterface *_profile);
+    QFrame* updateWidget(VultusProfileInterface *_profile);
     void rmvWidget(VultusProfileInterface *_profile);
 
     const QVector<QPushButton *> &connect_list() const;

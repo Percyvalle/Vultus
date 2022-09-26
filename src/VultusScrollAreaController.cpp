@@ -25,20 +25,9 @@ QFrame* VultusScrollAreaController::addWidget(VultusProfileInterface *_profile)
     widget_status_label->setAlignment(Qt::AlignCenter);
     widget_status_label->setMinimumWidth(60);
     widget_status_label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    switch(_profile->status()) {
-    case notAvailable:
-        widget_status_label->setStyleSheet("background-color: #cccccc;");
-        break;
-    case atWorkPlace:
-        widget_status_label->setStyleSheet("background-color: #3cb371;");
-        break;
-    case veryBusy:
-        widget_status_label->setStyleSheet("background-color: #cd5c5c;");
-        break;
-    }
 
     widget_button->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    widget_button->setText(_profile->last_name() + " " + _profile->first_name() + " " + _profile->middle_name());
+    widget_button->setText(_profile->full_name());
     widget_button->setObjectName(QString::number(_profile->id()));
     widget_button->setStyleSheet("QPushButton{background: rgba(245, 245, 245,0%); \
                                               border: 0;}");
@@ -46,7 +35,7 @@ QFrame* VultusScrollAreaController::addWidget(VultusProfileInterface *_profile)
 
     widget_photo_label->setMinimumWidth(70);
     widget_photo_label->setMaximumHeight(70);
-    widget_photo_label->setText(_profile->first_name().front());
+    widget_photo_label->setText(_profile->full_name().split(" ").at(1).front());
     widget_photo_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     widget_photo_label->setObjectName("photo_label");
     widget_photo_label->setStyleSheet("background-color: white; \
@@ -68,7 +57,12 @@ QFrame* VultusScrollAreaController::addWidget(VultusProfileInterface *_profile)
     widget_frame->setLayout(widget_layout);
 
     return widget_frame;
-}
+    }
+
+    QFrame *VultusScrollAreaController::updateWidget(VultusProfileInterface *_profile)
+    {
+
+    }
 
 void VultusScrollAreaController::rmvWidget(VultusProfileInterface *_profile)
 {

@@ -3,18 +3,17 @@
 VultusProfileInterface::VultusProfileInterface(QJsonObject _json_profile)
 {
     m_id = _json_profile["id"].toInt();
-    m_work_phone = _json_profile["workphone"].toInt();
-    m_work_place = _json_profile["workplace"].toInt();
-    m_status = _json_profile["status"].toInt();
-    m_phone = _json_profile["phone"].toString();
+    m_work_phone = _json_profile["work_phone"].toInt();
+    m_work_place = _json_profile["work_place"].toInt();
+    m_phone = _json_profile["phone"].toDouble();
     m_birthday = _json_profile["birthday"].toString();
     m_description = _json_profile["description"].toString();
     m_status_text = _json_profile["status_text"].toString();
-    m_first_name = _json_profile["first_name"].toString();
-    m_middle_name = _json_profile["middle_name"].toString();
-    m_last_name = _json_profile["last_name"].toString();
+    m_full_name = _json_profile["full_name"].toString();
     m_position = _json_profile["position"].toString();
     m_subdivision = _json_profile["subdivision"].toString();
+    m_status_name = _json_profile["status_name"].toString();
+    m_super_busy = _json_profile["super_busy"].toBool();
     m_online_status = false;
 }
 
@@ -38,12 +37,12 @@ int VultusProfileInterface::work_place() const
     return m_work_place;
 }
 
-int VultusProfileInterface::status() const
+const QString &VultusProfileInterface::status_name() const
 {
-    return m_status;
+    return m_status_name;
 }
 
-const QString &VultusProfileInterface::phone() const
+qlonglong VultusProfileInterface::phone() const
 {
     return m_phone;
 }
@@ -63,19 +62,9 @@ const QString &VultusProfileInterface::status_text() const
     return m_status_text;
 }
 
-const QString &VultusProfileInterface::first_name() const
+const QString &VultusProfileInterface::full_name() const
 {
-    return m_first_name;
-}
-
-const QString &VultusProfileInterface::middle_name() const
-{
-    return m_middle_name;
-}
-
-const QString &VultusProfileInterface::last_name() const
-{
-    return m_last_name;
+    return m_full_name;
 }
 
 const QString &VultusProfileInterface::position() const
@@ -91,6 +80,11 @@ const QString &VultusProfileInterface::subdivision() const
 void VultusProfileInterface::setOnlineStatus(bool newOnlineStatus)
 {
     m_online_status = newOnlineStatus;
+}
+
+bool VultusProfileInterface::super_busy() const
+{
+    return m_super_busy;
 }
 
 bool VultusProfileInterface::online_status() const

@@ -50,26 +50,21 @@ void VultusMainWindow::connectionUI()
 
 void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
 {
-    m_ui->profile_member_name->setText(_profile->last_name() + " " + _profile->first_name() + " " + _profile->middle_name());
+    m_ui->profile_member_name->setText(_profile->full_name());
     m_ui->position_label->setText(_profile->position());
     m_ui->subdivision_label->setText(_profile->subdivision());
     m_ui->birthday_label->setText(_profile->birthday());
     m_ui->discription_label->setText(_profile->description());
-    m_ui->phone_label->setText(_profile->phone());
+    m_ui->phone_label->setText(QString::number(_profile->phone()));
     m_ui->work_place_label->setText(QString::number(_profile->work_place()));
     m_ui->work_phone_label->setText(QString::number(_profile->work_phone()));
 
-    switch(_profile->status()) {
-    case notAvailable:
-        m_ui->profile_member_status->setStyleSheet("background-color: #cccccc;");
-        break;
-    case atWorkPlace:
-        m_ui->profile_member_status->setStyleSheet("background-color: #3cb371;");
-        break;
-    case veryBusy:
+    if (_profile->super_busy()){
         m_ui->profile_member_status->setStyleSheet("background-color: #cd5c5c;");
-        break;
+    } else {
+        m_ui->profile_member_status->setStyleSheet("background-color: #3cb371;");
     }
+
     QPixmap status_icon(":/icon/resource/status_icon/thunder_icon.png");
     m_ui->profile_member_status->setPixmap(status_icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     m_ui->profile_member_status->setAlignment(Qt::AlignCenter);

@@ -25,9 +25,9 @@ void VultusProfileMain::setWorkPlace(int _new_work_place)
     m_work_place = _new_work_place;
 }
 
-void VultusProfileMain::setStatus(int _new_status)
+void VultusProfileMain::setStatus(const QString &_new_status)
 {
-    m_status = _new_status;
+    m_status_name = _new_status;
 }
 
 void VultusProfileMain::setBirthday(const QString &_new_birthday)
@@ -45,19 +45,9 @@ void VultusProfileMain::setStatusText(const QString &_new_status_text)
     m_status_text = _new_status_text;
 }
 
-void VultusProfileMain::setFirstName(const QString &_new_first_name)
+void VultusProfileMain::setFullName(const QString &_new_full_name)
 {
-    m_first_name = _new_first_name;
-}
-
-void VultusProfileMain::setMiddleName(const QString &_new_middle_name)
-{
-    m_middle_name = _new_middle_name;
-}
-
-void VultusProfileMain::setLastName(const QString &_new_position)
-{
-    m_last_name = _new_position;
+    m_full_name = _new_full_name;
 }
 
 void VultusProfileMain::setPosition(const QString &_new_position)

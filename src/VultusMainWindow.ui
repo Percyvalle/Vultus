@@ -766,7 +766,7 @@ QLabel{background-color: rgba(245, 245, 245,0%);}</string>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="status_text_label">
            <property name="text">
             <string>**Текст статуса**</string>
            </property>

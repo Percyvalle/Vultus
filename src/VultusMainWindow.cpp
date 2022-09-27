@@ -50,14 +50,15 @@ void VultusMainWindow::connectionUI()
 
 void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
 {
-    m_ui->profile_member_name->setText(_profile->full_name());
-    m_ui->position_label->setText(_profile->position());
-    m_ui->subdivision_label->setText(_profile->subdivision());
-    m_ui->birthday_label->setText(_profile->birthday());
-    m_ui->discription_label->setText(_profile->description());
-    m_ui->phone_label->setText(QString::number(_profile->phone()));
-    m_ui->work_place_label->setText(QString::number(_profile->work_place()));
-    m_ui->work_phone_label->setText(QString::number(_profile->work_phone()));
+    m_ui->position_label->setText(_profile->position().toUtf8());
+    m_ui->birthday_label->setText(_profile->birthday().toUtf8());
+    m_ui->profile_member_name->setText(_profile->full_name().toUtf8());
+    m_ui->subdivision_label->setText(_profile->subdivision().toUtf8());
+    m_ui->discription_label->setText(_profile->description().toUtf8());
+    m_ui->status_text_label->setText(_profile->status_text().toUtf8());
+    m_ui->phone_label->setText(QString::number(_profile->phone()).toUtf8());
+    m_ui->work_place_label->setText(QString::number(_profile->work_place()).toUtf8());
+    m_ui->work_phone_label->setText(QString::number(_profile->work_phone()).toUtf8());
 
     if (_profile->super_busy()){
         m_ui->profile_member_status->setStyleSheet("background-color: #cd5c5c;");

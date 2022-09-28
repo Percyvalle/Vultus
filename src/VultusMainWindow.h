@@ -25,6 +25,7 @@ public:
 
     void initUI();
     void connectionUI();
+    void connectionResponse();
     void updateDossier(VultusProfileInterface* _profile);
 
 private slots:

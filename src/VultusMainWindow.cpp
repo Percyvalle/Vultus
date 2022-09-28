@@ -13,15 +13,7 @@ VultusMainWindow::VultusMainWindow(QWidget *parent)
 
     initUI();
     connectionUI();
-
-    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::authToServerResponse,
-            this, &VultusMainWindow::authToServerIsDone);
-    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::getUsersResponse,
-            this, &VultusMainWindow::getUsersIsDone);
-    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::getOnlineUsersResponse,
-            this, &VultusMainWindow::getOnlineUsersIsDone);
-    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::errorResponse,
-            this, &VultusMainWindow::showError);
+    connectionResponse();
 }
 
 VultusMainWindow::~VultusMainWindow()
@@ -36,16 +28,30 @@ void VultusMainWindow::initUI()
     setWindowTitle("Vultus");
 
     m_ui->profile_layout_area->layout()->setSizeConstraint(QLayout::SetMaximumSize);
-
-    QPixmap search_icon(":/icon/resource/icon_search.png");
-    m_ui->search_icon_label->setPixmap(search_icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    m_ui->search_icon_label->setPixmap(QPixmap(":/icon/resource/icon_search.png")
+                                       .scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void VultusMainWindow::connectionUI()
 {
-    connect(m_ui->employees_button, SIGNAL(clicked()), SLOT(employeesButtonClicked()));
-    connect(m_ui->profile_button, SIGNAL(clicked()), SLOT(profileButtonClicked()));
-    connect(m_ui->tasks_button, SIGNAL(clicked()), SLOT(tasksButtonClicked()));
+    connect(m_ui->employees_button, &QPushButton::clicked,
+            this, &VultusMainWindow::employeesButtonClicked);
+    connect(m_ui->profile_button, &QPushButton::clicked,
+            this, &VultusMainWindow::profileButtonClicked);
+    connect(m_ui->tasks_button, &QPushButton::clicked,
+            this, &VultusMainWindow::tasksButtonClicked);
+}
+
+void VultusMainWindow::connectionResponse()
+{
+    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::authToServerResponse,
+            this, &VultusMainWindow::authToServerIsDone);
+    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::getUsersResponse,
+            this, &VultusMainWindow::getUsersIsDone);
+    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::getOnlineUsersResponse,
+            this, &VultusMainWindow::getOnlineUsersIsDone);
+    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::errorResponse,
+            this, &VultusMainWindow::showError);
 }
 
 void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
@@ -65,9 +71,7 @@ void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
     } else {
         m_ui->profile_member_status->setStyleSheet("background-color: #3cb371;");
     }
-
-    QPixmap status_icon(":/icon/resource/status_icon/thunder_icon.png");
-    m_ui->profile_member_status->setPixmap(status_icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    m_ui->profile_member_status->setPixmap(QPixmap(":/icon/resource/status_icon/thunder_icon.png").scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     m_ui->profile_member_status->setAlignment(Qt::AlignCenter);
 
     if(_profile->online_status()){
@@ -109,7 +113,7 @@ void VultusMainWindow::getUsersIsDone(QJsonArray _response)
 
 void VultusMainWindow::getOnlineUsersIsDone(QJsonArray _response)
 {
-    for(VultusProfileInterface *profile_interface : m_profile_members){
+    for(VultusProfileInterface *profile_interface : qAsConst(m_profile_members)){
         profile_interface->setOnlineStatus(false);
     }
 

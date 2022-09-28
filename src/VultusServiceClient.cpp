@@ -28,7 +28,7 @@ void VultusServiceClient::sendToServer(VultusCommand* _command)
 
     out.setVersion(QDataStream::Qt_5_15);
 
-    out << quint16(0) << QVariant(_command->getCommand());
+    out << quint16(0) << _command->getCommand();
     out.device()->seek(0);
     out << quint16(m_data.size() - sizeof(quint16));
 
@@ -54,9 +54,8 @@ void VultusServiceClient::readyReadMessage()
             m_block_size = 0;
         }
 
-        QVariant response;
-        in >> response;
-        QJsonArray json_response = response.value<QJsonArray>();
+        QJsonArray json_response;
+        in >> json_response;
         qDebug() << json_response;
         m_response_handler->processResponse(json_response);
     }

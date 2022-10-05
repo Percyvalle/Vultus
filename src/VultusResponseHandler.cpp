@@ -10,7 +10,7 @@ VultusResponseHandler::~VultusResponseHandler()
 
 }
 
-void VultusResponseHandler::processResponse(QJsonArray& _response)
+void VultusResponseHandler::processResponse(QJsonArray _response)
 {
     QJsonObject response = _response.first().toObject();
 

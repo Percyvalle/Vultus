@@ -13,7 +13,7 @@ public:
     VultusResponseHandler();
     ~VultusResponseHandler();
 
-    void processResponse(QJsonArray& _response);
+    void processResponse(QJsonArray _response);
 
 signals:
     void errorResponse(QJsonArray _response);

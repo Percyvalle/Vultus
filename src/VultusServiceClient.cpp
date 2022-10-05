@@ -1,6 +1,5 @@
 #include "VultusServiceClient.h"
 
-
 VultusServiceClient::VultusServiceClient(QObject *parent)
     : QTcpSocket{parent}
 {
@@ -26,9 +25,9 @@ void VultusServiceClient::sendToServer(VultusCommand* _command)
     m_data.clear();
     QDataStream out(&m_data, QIODevice::WriteOnly);
 
-    out.setVersion(QDataStream::Qt_5_15);
+    out.setVersion(QDataStream::Qt_5_11);
 
-    out << quint16(0) << _command->getCommand();
+    out << quint16(0) << QVariant(QJsonDocument(_command->getCommand()).toJson());
     out.device()->seek(0);
     out << quint16(m_data.size() - sizeof(quint16));
 
@@ -38,7 +37,7 @@ void VultusServiceClient::sendToServer(VultusCommand* _command)
 void VultusServiceClient::readyReadMessage()
 {
     QDataStream in(this);
-    in.setVersion(QDataStream::Qt_5_15);
+    in.setVersion(QDataStream::Qt_5_11);
 
     if(in.status() == QDataStream::Ok){
         if(m_block_size == 0){
@@ -54,10 +53,11 @@ void VultusServiceClient::readyReadMessage()
             m_block_size = 0;
         }
 
-        QJsonArray json_response;
-        in >> json_response;
-        qDebug() << json_response;
-        m_response_handler->processResponse(json_response);
+        QVariant response;
+        in >> response;
+        QJsonDocument json_response = QJsonDocument::fromJson(QString(response.toByteArray().data()).toUtf8());
+        qDebug() << json_response.array();
+        m_response_handler->processResponse(json_response.array());
     }
 }
 

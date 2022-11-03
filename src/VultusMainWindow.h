@@ -33,6 +33,7 @@ private slots:
     void getUsersIsDone(QJsonArray _response);
     void getOnlineUsersIsDone(QJsonArray _response);
     void showError(QJsonArray _response);
+    void sendMainProfile();
 
     void employeesButtonClicked();
     void profileButtonClicked();

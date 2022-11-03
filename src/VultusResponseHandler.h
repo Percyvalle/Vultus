@@ -20,6 +20,7 @@ signals:
     void authToServerResponse(QJsonArray _response);
     void getOnlineUsersResponse(QJsonArray _response);
     void getUsersResponse(QJsonArray _response);
+    void sendMainProfile();
 };
 
 #endif // VULTUSRESPONSEHANDLER_H

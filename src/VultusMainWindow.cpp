@@ -52,6 +52,8 @@ void VultusMainWindow::connectionResponse()
             this, &VultusMainWindow::getOnlineUsersIsDone);
     connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::errorResponse,
             this, &VultusMainWindow::showError);
+//    connect(VultusServiceClient::client().m_response_handler, &VultusResponseHandler::sendMainProfile,
+//            this, &VultusMainWindow::sendMainProfile());
 }
 
 void VultusMainWindow::updateDossier(VultusProfileInterface *_profile)
@@ -113,13 +115,13 @@ void VultusMainWindow::getUsersIsDone(QJsonArray _response)
 
 void VultusMainWindow::getOnlineUsersIsDone(QJsonArray _response)
 {
-    for(VultusProfileInterface *profile_interface : qAsConst(m_profile_members)){
-        profile_interface->setOnlineStatus(false);
-    }
+//    for(VultusProfileInterface *profile_interface : qAsConst(m_profile_members)){
+//        profile_interface->setOnlineStatus(false);
+//    }
 
-    for(QJsonValueRef profile_object : _response){
-        m_profile_members[profile_object.toObject()["id"].toString()]->setOnlineStatus(true);
-    }
+//    for(QJsonValueRef profile_object : _response){
+//        m_profile_members[profile_object.toObject()["id"].toString()]->setOnlineStatus(true);
+//    }
 }
 
 void VultusMainWindow::showError(QJsonArray _response)
@@ -127,6 +129,11 @@ void VultusMainWindow::showError(QJsonArray _response)
     QMessageBox messageBox;
     messageBox.critical(0,"Error", _response.first().toObject()["ERROR"].toString());
     messageBox.setFixedSize(500,200);
+}
+
+void VultusMainWindow::sendMainProfile()
+{
+
 }
 
 void VultusMainWindow::employeesButtonClicked()

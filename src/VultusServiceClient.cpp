@@ -3,8 +3,6 @@
 VultusServiceClient::VultusServiceClient(QObject *parent)
     : QTcpSocket{parent}
 {
-    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorConnectToServer()));
-    connect(this, SIGNAL(connected()), this, SLOT(doneConnectToServer()));
 }
 VultusServiceClient::~VultusServiceClient()
 {
@@ -14,10 +12,12 @@ VultusServiceClient::~VultusServiceClient()
 
 void VultusServiceClient::connectToServer(QString &_address)
 {
-    connectToHost(_address, 2000);
-
+    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorConnectToServer()));
+    connect(this, SIGNAL(connected()), this, SLOT(doneConnectToServer()));
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadMessage()));
     connect(this, SIGNAL(disconnected()), this, SLOT(deleteLater()));
+
+    connectToHost(_address, 2000);
 }
 
 void VultusServiceClient::sendToServer(VultusCommand* _command)

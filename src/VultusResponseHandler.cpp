@@ -29,6 +29,9 @@ void VultusResponseHandler::processResponse(QJsonArray _response)
             _response.removeFirst();
             emit getOnlineUsersResponse(_response);
             return;
+        } else if (response_name == "getMainProfile"){
+            emit sendMainProfile();
+            return;
         }
     } else if (!response["ERROR"].isNull()){
         emit errorResponse(_response);
